@@ -62,10 +62,17 @@ jobs:
       run: uv pip install .[test]
     - name: Install Docutils ${{ matrix.docutils }}
       run: uv pip install --upgrade "docutils~=${{ matrix.docutils }}.0"
+    - name: Instrument code
+      uses: AryazE/auto-dylin/instrument@main
+      with:
+        analysis-coverage: false
     - name: Test with pytest
       run: python -m pytest -vv --durations 25
       env:
         PYTHONWARNINGS: "error"  # treat all warnings as errors
+    - name: Report results
+      uses: AryazE/auto-dylin/report@main
+        
 
 #   deadsnakes:
 #     runs-on: ubuntu-latest
