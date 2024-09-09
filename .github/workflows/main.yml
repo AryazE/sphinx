@@ -67,10 +67,11 @@ jobs:
       with:
         analysis-coverage: false
     - name: Test with pytest
-      run: python -m pytest -vv --durations 25
+      run: python -m pytest -n 4 --timeout 300
       env:
         PYTHONWARNINGS: "error"  # treat all warnings as errors
     - name: Report results
+      if: always()
       uses: AryazE/auto-dylin/report@main
         
 
